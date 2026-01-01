@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="supported-color-schemes" content="light dark" />
+    <title>Confirm Your Email Address</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background-color: #f5f5f5;
+        color: #222126;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+      }
+      .header {
+        padding: 40px 40px 20px;
+        text-align: center;
+      }
+      .content {
+        padding: 20px 40px 40px;
+      }
+      h1 {
+        margin: 0 0 20px;
+        font-size: 24px;
+        font-weight: 600;
+        color: #222126;
+      }
+      p {
+        margin: 0 0 16px;
+        font-size: 16px;
+        line-height: 1.5;
+        color: #222126;
+      }
+      .button {
+        display: inline-block;
+        margin: 20px 0;
+        padding: 12px 24px;
+        background-color: #222126;
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 500;
+      }
+      .footer {
+        padding: 20px 40px;
+        text-align: center;
+        font-size: 12px;
+        color: #666;
+        border-top: 1px solid #eeeeee;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Confirm Your Email Address</h1>
+      </div>
+      <div class="content">
+        <p>Hello {{.Username}},</p>
+        <p>Thank you for signing up! Please confirm your email address by clicking the button below:</p>
+        <a href="{{.EmailConfirmLink}}" class="button">Confirm Email</a>
+        <p>This link will expire in {{.ExpirationTimeInMinutes}} minutes.</p>
+        <p>If you didn't create an account, you can safely ignore this email.</p>
+      </div>
+      <div class="footer">
+        <p>This message is automatically generated. You've received this message because this email address was used to create an account.</p>
+        <p>© {{.Year}}, All rights reserved</p>
+      </div>
+    </div>
+  </body>
+</html>

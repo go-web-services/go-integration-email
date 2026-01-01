@@ -1,0 +1,16 @@
+Hello {{.Username}},
+
+Here is your one-time sign-in code:
+
+{{.OTPCode}}
+
+This code will expire in {{.ExpirationTimeInMinutes}} minutes.
+
+If you didn't request this code, please ignore this email and ensure your account is secure.
+
+Best regards,
+The Team
+
+This message is automatically generated. You've received this message because this email address is associated with your account.
+
+© {{.Year}}, All rights reserved

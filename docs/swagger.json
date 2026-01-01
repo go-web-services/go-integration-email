@@ -1,0 +1,74 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Email Integration API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "basePath": "/api",
+    "paths": {
+        "/v1/send": {
+            "post": {
+                "description": "Send an email to the specified recipients with the parameters that will be inserted",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Send an email",
+                "parameters": [
+                    {
+                        "description": "Send Email Request",
+                        "name": "SendEmailRequest",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/go-integration-email_pkg_client_dto.GeneralSendEmailDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/go-integration-email_pkg_client_dto.SendEmailOutputDTO"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "go-integration-email_pkg_client_dto.GeneralSendEmailDTO": {
+            "type": "object",
+            "required": [
+                "emailType",
+                "recipients"
+            ],
+            "properties": {
+                "emailType": {
+                    "type": "string"
+                },
+                "params": {
+                    "type": "object",
+                    "additionalProperties": {}
+                },
+                "recipients": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "go-integration-email_pkg_client_dto.SendEmailOutputDTO": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

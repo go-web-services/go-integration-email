@@ -1,0 +1,49 @@
+basePath: /api
+definitions:
+  go-integration-email_pkg_client_dto.GeneralSendEmailDTO:
+    properties:
+      emailType:
+        type: string
+      params:
+        additionalProperties: {}
+        type: object
+      recipients:
+        items:
+          type: string
+        type: array
+    required:
+    - emailType
+    - recipients
+    type: object
+  go-integration-email_pkg_client_dto.SendEmailOutputDTO:
+    properties:
+      message:
+        type: string
+    type: object
+info:
+  contact: {}
+  title: Email Integration API
+  version: "1.0"
+paths:
+  /v1/send:
+    post:
+      consumes:
+      - application/json
+      description: Send an email to the specified recipients with the parameters that
+        will be inserted
+      parameters:
+      - description: Send Email Request
+        in: body
+        name: SendEmailRequest
+        required: true
+        schema:
+          $ref: '#/definitions/go-integration-email_pkg_client_dto.GeneralSendEmailDTO'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/go-integration-email_pkg_client_dto.SendEmailOutputDTO'
+      summary: Send an email
+swagger: "2.0"

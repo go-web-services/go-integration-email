@@ -1,0 +1,31 @@
+package service
+
+import (
+	"github.com/gin-gonic/gin"
+
+	"go-integration-email/pkg/client/dto"
+
+	platformUtils "github.com/Lomank123/go-web-platform/utils"
+
+	"fmt"
+)
+
+type EmailAPIService interface {
+	SendEmailV1(context *gin.Context, payload dto.EmailPayload) (dto.SendEmailOutputDTO, error)
+}
+
+type emailAPIService struct {
+	apiURL string
+}
+
+func NewEmailAPIService(host string) EmailAPIService {
+	return &emailAPIService{apiURL: fmt.Sprintf("%s/api/v1", host)}
+}
+
+func (s *emailAPIService) SendEmailV1(context *gin.Context, payload dto.EmailPayload) (dto.SendEmailOutputDTO, error) {
+	url := fmt.Sprintf("%s/send", s.apiURL)
+	var responseBody dto.SendEmailOutputDTO
+
+	err := platformUtils.SendRequest("POST", url, payload, &responseBody, context)
+	return responseBody, err
+}

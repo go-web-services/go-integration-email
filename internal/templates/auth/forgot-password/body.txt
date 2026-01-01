@@ -1,0 +1,16 @@
+Hello {{.Username}},
+
+We received a request to reset your password. Click the link below to set a new password:
+
+{{.ForgotPasswordLink}}
+
+This link will expire in {{.ExpirationTimeInMinutes}} minutes.
+
+If you didn't request a password reset, you can safely ignore this email.
+
+Best regards,
+The Team
+
+This message is automatically generated. You've received this message because this email address is associated with your account.
+
+© {{.Year}}, All rights reserved
