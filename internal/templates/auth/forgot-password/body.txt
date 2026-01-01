@@ -1,4 +1,4 @@
-Hello {{.Username}},
+Hello user,
 
 We received a request to reset your password. Click the link below to set a new password:
 

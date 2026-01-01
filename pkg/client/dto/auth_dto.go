@@ -8,7 +8,6 @@ type AuthForgotPasswordInputDTO struct {
 }
 
 type AuthForgotPasswordParams struct {
-	Username                string `json:"username" binding:"required"`
 	ForgotPasswordLink      string `json:"forgotPasswordLink" binding:"required"`
 	ExpirationTimeInMinutes int    `json:"expirationTimeInMinutes" binding:"required"`
 }
@@ -19,7 +18,6 @@ type AuthEmailConfirmInputDTO struct {
 }
 
 type AuthEmailConfirmParams struct {
-	Username                string `json:"username" binding:"required"`
 	EmailConfirmLink        string `json:"emailConfirmLink" binding:"required"`
 	ExpirationTimeInMinutes int    `json:"expirationTimeInMinutes" binding:"required"`
 }
@@ -30,7 +28,6 @@ type AuthOTPSigninInputDTO struct {
 }
 
 type AuthOTPSigninParams struct {
-	Username                string `json:"username" binding:"required"`
 	OTPCode                 string `json:"otpCode" binding:"required"`
 	ExpirationTimeInMinutes int    `json:"expirationTimeInMinutes" binding:"required"`
 }

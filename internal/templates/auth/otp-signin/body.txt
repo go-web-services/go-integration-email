@@ -1,4 +1,4 @@
-Hello {{.Username}},
+Hello user,
 
 Here is your one-time sign-in code:
 
