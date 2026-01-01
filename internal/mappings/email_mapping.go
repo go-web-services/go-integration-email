@@ -1,10 +1,10 @@
 package mappings
 
 import (
-	"go-integration-email/internal/types"
+	"github.com/Lomank123/go-integration-email/internal/types"
 
-	clientConsts "go-integration-email/pkg/client/constants"
-	clientTypes "go-integration-email/pkg/client/types"
+	clientConsts "github.com/Lomank123/go-integration-email/pkg/client/constants"
+	clientTypes "github.com/Lomank123/go-integration-email/pkg/client/types"
 )
 
 var EmailTypeMapping = map[clientTypes.EmailType]types.EmailTemplateMapping{

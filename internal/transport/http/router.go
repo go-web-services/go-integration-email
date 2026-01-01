@@ -1,8 +1,8 @@
 package http
 
 import (
-	"go-integration-email/internal/service"
-	http "go-integration-email/internal/transport/http/handler"
+	"github.com/Lomank123/go-integration-email/internal/service"
+	http "github.com/Lomank123/go-integration-email/internal/transport/http/handler"
 
 	"github.com/Lomank123/go-web-platform/logger"
 

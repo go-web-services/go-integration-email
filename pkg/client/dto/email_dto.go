@@ -1,7 +1,7 @@
 package dto
 
 import (
-	"go-integration-email/pkg/client/types"
+	"github.com/Lomank123/go-integration-email/pkg/client/types"
 )
 
 // All email DTOs must implement this interface

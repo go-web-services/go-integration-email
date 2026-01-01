@@ -1,4 +1,4 @@
-module go-integration-email/pkg/client
+module github.com/Lomank123/go-integration-email/pkg/client
 
 go 1.24.0
 

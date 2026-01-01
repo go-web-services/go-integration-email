@@ -15,11 +15,11 @@ import (
 	platformMiddleware "github.com/Lomank123/go-web-platform/middleware"
 	"github.com/gin-gonic/gin"
 
-	"go-integration-email/config"
-	"go-integration-email/docs"
-	"go-integration-email/internal/service"
-	emailHTTP "go-integration-email/internal/transport/http"
-	"go-integration-email/internal/utils"
+	"github.com/Lomank123/go-integration-email/config"
+	"github.com/Lomank123/go-integration-email/docs"
+	"github.com/Lomank123/go-integration-email/internal/service"
+	emailHTTP "github.com/Lomank123/go-integration-email/internal/transport/http"
+	"github.com/Lomank123/go-integration-email/internal/utils"
 )
 
 // @title           Email Integration API

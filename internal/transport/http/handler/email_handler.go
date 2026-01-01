@@ -3,13 +3,13 @@ package http
 import (
 	"net/http"
 
-	"go-integration-email/internal/service"
+	"github.com/Lomank123/go-integration-email/internal/service"
 
 	"github.com/Lomank123/go-web-platform/logger"
 
 	"github.com/gin-gonic/gin"
 
-	clientDTO "go-integration-email/pkg/client/dto"
+	clientDTO "github.com/Lomank123/go-integration-email/pkg/client/dto"
 
 	platformError "github.com/Lomank123/go-web-platform/error"
 )

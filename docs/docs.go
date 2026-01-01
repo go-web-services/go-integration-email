@@ -32,7 +32,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/go-integration-email_pkg_client_dto.GeneralSendEmailDTO"
+                            "$ref": "#/definitions/github_com_Lomank123_go-integration-email_pkg_client_dto.GeneralSendEmailDTO"
                         }
                     }
                 ],
@@ -40,7 +40,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/go-integration-email_pkg_client_dto.SendEmailOutputDTO"
+                            "$ref": "#/definitions/github_com_Lomank123_go-integration-email_pkg_client_dto.SendEmailOutputDTO"
                         }
                     }
                 }
@@ -48,7 +48,7 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "go-integration-email_pkg_client_dto.GeneralSendEmailDTO": {
+        "github_com_Lomank123_go-integration-email_pkg_client_dto.GeneralSendEmailDTO": {
             "type": "object",
             "required": [
                 "emailType",
@@ -70,7 +70,7 @@ const docTemplate = `{
                 }
             }
         },
-        "go-integration-email_pkg_client_dto.SendEmailOutputDTO": {
+        "github_com_Lomank123_go-integration-email_pkg_client_dto.SendEmailOutputDTO": {
             "type": "object",
             "properties": {
                 "message": {

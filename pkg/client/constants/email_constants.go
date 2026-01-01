@@ -1,7 +1,7 @@
 package constants
 
 import (
-	"go-integration-email/pkg/client/types"
+	"github.com/Lomank123/go-integration-email/pkg/client/types"
 )
 
 var (

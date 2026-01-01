@@ -1,6 +1,6 @@
 basePath: /api
 definitions:
-  go-integration-email_pkg_client_dto.GeneralSendEmailDTO:
+  github_com_Lomank123_go-integration-email_pkg_client_dto.GeneralSendEmailDTO:
     properties:
       emailType:
         type: string
@@ -15,7 +15,7 @@ definitions:
     - emailType
     - recipients
     type: object
-  go-integration-email_pkg_client_dto.SendEmailOutputDTO:
+  github_com_Lomank123_go-integration-email_pkg_client_dto.SendEmailOutputDTO:
     properties:
       message:
         type: string
@@ -37,13 +37,13 @@ paths:
         name: SendEmailRequest
         required: true
         schema:
-          $ref: '#/definitions/go-integration-email_pkg_client_dto.GeneralSendEmailDTO'
+          $ref: '#/definitions/github_com_Lomank123_go-integration-email_pkg_client_dto.GeneralSendEmailDTO'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/go-integration-email_pkg_client_dto.SendEmailOutputDTO'
+            $ref: '#/definitions/github_com_Lomank123_go-integration-email_pkg_client_dto.SendEmailOutputDTO'
       summary: Send an email
 swagger: "2.0"

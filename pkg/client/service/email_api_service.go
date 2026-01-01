@@ -3,7 +3,7 @@ package service
 import (
 	"github.com/gin-gonic/gin"
 
-	"go-integration-email/pkg/client/dto"
+	"github.com/Lomank123/go-integration-email/pkg/client/dto"
 
 	platformUtils "github.com/Lomank123/go-web-platform/utils"
 
