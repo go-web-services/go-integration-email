@@ -13,3 +13,8 @@ services:
       - ${APP_PORT}:${APP_PORT}
     env_file:
       - .env
+
+networks:
+  go-network:
+    external: true
+    driver: bridge
