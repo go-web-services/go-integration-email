@@ -8,13 +8,13 @@ import (
 	"net/smtp"
 	"time"
 
-	"github.com/Lomank123/go-integration-email/config"
-	"github.com/Lomank123/go-integration-email/internal/mappings"
-	"github.com/Lomank123/go-integration-email/internal/utils"
+	"github.com/go-web-services/go-integration-email/config"
+	"github.com/go-web-services/go-integration-email/internal/mappings"
+	"github.com/go-web-services/go-integration-email/internal/utils"
 
-	"github.com/Lomank123/go-web-platform/logger"
+	"github.com/go-web-services/go-web-platform/logger"
 
-	clientTypes "github.com/Lomank123/go-integration-email/pkg/client/types"
+	clientTypes "github.com/go-web-services/go-integration-email/pkg/client/types"
 )
 
 type EmailService interface {

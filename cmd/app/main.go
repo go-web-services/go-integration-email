@@ -10,16 +10,16 @@ import (
 	"syscall"
 	"time"
 
-	platform "github.com/Lomank123/go-web-platform/entrypoint"
-	"github.com/Lomank123/go-web-platform/logger"
-	platformMiddleware "github.com/Lomank123/go-web-platform/middleware"
 	"github.com/gin-gonic/gin"
+	platform "github.com/go-web-services/go-web-platform/entrypoint"
+	"github.com/go-web-services/go-web-platform/logger"
+	platformMiddleware "github.com/go-web-services/go-web-platform/middleware"
 
-	"github.com/Lomank123/go-integration-email/config"
-	"github.com/Lomank123/go-integration-email/docs"
-	"github.com/Lomank123/go-integration-email/internal/service"
-	emailHTTP "github.com/Lomank123/go-integration-email/internal/transport/http"
-	"github.com/Lomank123/go-integration-email/internal/utils"
+	"github.com/go-web-services/go-integration-email/config"
+	"github.com/go-web-services/go-integration-email/docs"
+	"github.com/go-web-services/go-integration-email/internal/service"
+	emailHTTP "github.com/go-web-services/go-integration-email/internal/transport/http"
+	"github.com/go-web-services/go-integration-email/internal/utils"
 )
 
 // @title           Email Integration API
@@ -47,7 +47,6 @@ func main() {
 		logg,
 		utils.PingEmailServer,
 		platformMiddleware.DefaultLoggingConfig(),
-		nil,
 		cfg.App.Env,
 	)
 	emailHTTP.SetupRouter(router, emailService, logg)

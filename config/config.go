@@ -3,9 +3,9 @@ package config
 import (
 	"strconv"
 
-	platformUtils "github.com/Lomank123/go-web-platform/utils"
+	platformUtils "github.com/go-web-services/go-web-platform/utils"
 
-	platformTypes "github.com/Lomank123/go-web-platform/types"
+	platformTypes "github.com/go-web-services/go-web-platform/types"
 )
 
 type AppConfig struct {

@@ -1,187 +1,105 @@
-# gld-integration-email
+# go-integration-email
 
-## Usage
+HTTP integration service that sends transactional email (auth flows, notifications) on behalf of other microservices. Callers use a single `POST /api/v1/send` endpoint with an **email type** string, **recipients**, and a **params** map; the service picks HTML/text/subject templates, renders them with those params, and delivers via SMTP.
 
-- Clone the repo:
+**Scope:** template-backed outbound mail only (no inbox, no webhooks). **Consumers:** backend services that import the `pkg/client` module and call the API or use the thin client wrapper.
 
-```shell
-git clone https://git.hexens.com/gld/integration/email.git
-```
+## API examples (JSON)
 
-- Create and fill in `.env` file:
+### Send email (generic payload)
 
-```shell
-cp .env.sample .env
-```
+`emailType` values are string constants such as `AuthForgotPassword`, `AuthEmailConfirm`, and `AuthOTPSignin` (see `pkg/client/constants`).
 
-- Build and start the container:
+**Request** `POST /api/v1/send`
 
-```shell
-docker compose up -d
-```
-
----
-
-## How to add new email
-
-1. Add email type as constant to `/pkg/client/constants/email_types.go`.
-
-Example:
-
-```go
-const WELCOME_EMAIL types.EmailType = "3"
-```
-
-2. Create 3 template files for email subject, text and html representations.
-
-By convention a separate folder must be created for each email type and files must have these names:
-
-- `subject.txt` - Subject
-- `body.txt` - Text representation
-- `body.html` - HTML representation
-
-Example:
-
-```shell
-cd internal/templates
-mkdir welcome
-cd welcome
-touch subject.txt
-touch body.txt
-touch body.html
-```
-
-3. If you need to insert variables into templates, do so using `{{.paramFirst}}` notation.
-
-4. Create DTO for your email payload in `/pkg/client/dto/dto.go`.
-
-Example:
-
-```go
-type WelcomeInputDTO struct {
-	BaseSendEmailDTO
-	Params WelcomeParams `json:"params" binding:"required"`
-}
-
-type WelcomeParams struct {
-	Username  string `json:"username" binding:"required"`
+```json
+{
+  "emailType": "AuthForgotPassword",
+  "recipients": ["user@example.com"],
+  "params": {
+    "forgotPasswordLink": "https://app.example.com/reset?token=abc",
+    "expirationTimeInMinutes": 30
+  }
 }
 ```
 
-5. Commit & Push changes made to `/pkg/client` to separate branch.
-6. Update module dependancy in email microservice.
+**Response** `200 OK`
 
-Example:
-
-```shell
-source .env
-go get git.hexens.com/gld/integration/email.git/pkg/client@new-branch
-```
-
-Where `@new-branch` is name of your branch.
-
-7. Add template filename mapping to `/internal/mappings/mappings.go`.
-
-Example:
-
-```go
-var EmailTypeMapping = map[clientTypes.EmailType]EmailInfo{
-  ...
-	clientConsts.WELCOME_EMAIL: {
-		HTMLTemplateFileName: buildTemplatePath("welcome/body.html"),
-		TextTemplateFileName: buildTemplatePath("welcome/body.txt"),
-		SubjectFileName:      buildTemplatePath("welcome/subject.txt"),
-	},
-  ...
+```json
+{
+  "message": "Email sent successfully"
 }
 ```
 
-8.  Restart docker container.
+Typed client DTOs wrap the same shape with explicit `params` structs, for example forgot-password:
 
-```shell
-docker compose down
-docker compose up -d
+```json
+{
+  "emailType": "AuthForgotPassword",
+  "recipients": ["user@example.com"],
+  "params": {
+    "forgotPasswordLink": "https://app.example.com/reset?token=abc",
+    "expirationTimeInMinutes": 30
+  }
+}
 ```
 
-9. Adjust `/pkg/client/examples/main.go` and run it to test new email type.
+Email confirmation:
 
-```shell
-go run pkg/client/examples/main.go
+```json
+{
+  "emailType": "AuthEmailConfirm",
+  "recipients": ["user@example.com"],
+  "params": {
+    "emailConfirmLink": "https://app.example.com/confirm?token=xyz",
+    "expirationTimeInMinutes": 60
+  }
+}
 ```
 
----
+OTP sign-in:
+
+```json
+{
+  "emailType": "AuthOTPSignin",
+  "recipients": ["user@example.com"],
+  "params": {
+    "otpCode": "482915",
+    "expirationTimeInMinutes": 10
+  }
+}
+```
+
+Validation and platform errors follow the shared `go-web-platform` error format (for example `VALIDATION_ERROR` with `errors[].field` using **JSON tag** names such as `emailType`, not Go struct field names).
+
+## Run locally
+
+- Clone: `git clone git@github.com:go-web-services/go-integration-email.git`
+- Copy env: `cp .env.sample .env` and set SMTP-related variables (`EMAIL_SERVER`, `EMAIL_PORT`, `EMAIL_USERNAME`, `EMAIL_PASSWORD`, `EMAIL_FROM`, etc.).
+- With Docker (`debug/Dockerfile`, bind-mounted sources): `docker compose up -d`
+- Application port defaults from `APP_PORT` (see `.env.sample`).
+
+## Client module (`pkg/client`)
+
+Other services depend on `github.com/go-web-services/go-integration-email/pkg/client` for DTOs, constants, and `EmailAPIService` (HTTP client using platform `SendRequest`). For local development, use a replace in the consuming `go.mod`:
+
+```bash
+go mod edit -replace github.com/go-web-services/go-integration-email/pkg/client=/path/to/go-integration-email/pkg/client
+```
+
+Private modules: set `GOPRIVATE=github.com/go-web-services/*` when pulling from GitHub.
+
+## Adding a new email type
+
+1. Add a constant in `pkg/client/constants/email_constants.go`.
+2. Add templates under `internal/templates/<name>/`: `subject.txt`, `body.txt`, `body.html`.
+3. Add DTOs in `pkg/client/dto` if the payload is typed; map the type in `internal/mappings/email_mapping.go`.
+4. Regenerate Swagger from the repo root: `gocheck -d` (or `swag init` with your project’s usual flags).
 
 ## Swagger
 
-1. Install `swag`:
+After code or comment changes, regenerate docs (e.g. `gocheck -d`). Open `http://127.0.0.1:<APP_PORT>/swagger/index.html` when the service is running.
 
-```shell
-go install github.com/swaggo/swag/cmd/swag@latest
-```
+## Author
 
-2. Generate docs based on comments:
-
-```shell
-swag init --pd --parseInternal -g cmd/app/main.go
-```
-
-Note: This will generate files in `/docs` dir. `--pd --parseInternal` flags are needed to resolve module dependancies if they are used in swagger schema.
-
-3. Go to http://127.0.0.1:8000/swagger/index.html
-
----
-
-## Client module
-
-Client is a shared module which contains:
-
-- Constants
-- DTOs for other microservices
-- Service methods to make a call to email microservice API
-
----
-
-## Shared modules
-
-To setup a shared module:
-
-1. Create folder inside main module dir and init a new one.
-
-```shell
-mkdir client
-cd client
-go mod init <module_name>
-```
-
-Example module name: `git.hexens.com/gld/integration/email.git/pkg/client`
-
-2. Push your module to GitLab.
-3. Create `.env` file in the repository you want to install shared modules and add these variables.
-
-```
-# Must be exported
-export GOPRIVATE=git.hexens.com/path/to/repo/dir
-export GITLAB_TOKEN=<gitlab_token>
-```
-
-GitLab token generation: https://git.hexens.com/-/user_settings/personal_access_tokens
-
-4. Install the module.
-
-Example:
-
-```shell
-source .env
-go get git.hexens.com/gld/integration/email.git/pkg/client@initial
-```
-
-where `@initial` is the name of the branch (if you need it during development)
-
-5. Add shortcut to local repository so you could use shared module without upgrading the version each time:
-
-```shell
-go mod edit -replace git.hexens.com/gld/integration/email.git/pkg/client=pkg/client
-```
-
-Reference:
-- https://go.dev/doc/tutorial/call-module-code
+[Lomank](https://lomank.com)

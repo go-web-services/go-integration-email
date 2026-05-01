@@ -3,15 +3,15 @@ package http
 import (
 	"net/http"
 
-	"github.com/Lomank123/go-integration-email/internal/service"
+	"github.com/go-web-services/go-integration-email/internal/service"
 
-	"github.com/Lomank123/go-web-platform/logger"
+	"github.com/go-web-services/go-web-platform/logger"
 
 	"github.com/gin-gonic/gin"
 
-	clientDTO "github.com/Lomank123/go-integration-email/pkg/client/dto"
+	clientDTO "github.com/go-web-services/go-integration-email/pkg/client/dto"
 
-	platformError "github.com/Lomank123/go-web-platform/error"
+	platformError "github.com/go-web-services/go-web-platform/error"
 )
 
 type EmailHandler interface {

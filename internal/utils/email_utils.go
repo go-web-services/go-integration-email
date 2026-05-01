@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"net/smtp"
 
-	"github.com/Lomank123/go-integration-email/config"
-	internalConstants "github.com/Lomank123/go-integration-email/internal/constants"
+	"github.com/go-web-services/go-integration-email/config"
+	internalConstants "github.com/go-web-services/go-integration-email/internal/constants"
 )
 
 // PingEmailServer checks if the SMTP server is reachable.
