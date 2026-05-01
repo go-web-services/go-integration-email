@@ -1,10 +1,10 @@
-module github.com/Lomank123/go-integration-email/pkg/client
+module github.com/go-web-services/go-integration-email/pkg/client
 
 go 1.24.0
 
 require (
-	github.com/Lomank123/go-web-platform v0.0.0-20250822171926-a575b21f44d9
 	github.com/gin-gonic/gin v1.10.0
+	github.com/go-web-services/go-web-platform v0.0.0-20260501150237-122bf32135c9
 )
 
 require (

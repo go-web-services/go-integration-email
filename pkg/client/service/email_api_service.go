@@ -3,9 +3,9 @@ package service
 import (
 	"github.com/gin-gonic/gin"
 
-	"github.com/Lomank123/go-integration-email/pkg/client/dto"
+	"github.com/go-web-services/go-integration-email/pkg/client/dto"
 
-	platformUtils "github.com/Lomank123/go-web-platform/utils"
+	platformUtils "github.com/go-web-services/go-web-platform/utils"
 
 	"fmt"
 )

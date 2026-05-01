@@ -1,16 +1,15 @@
-module github.com/Lomank123/go-integration-email
+module github.com/go-web-services/go-integration-email
 
 go 1.24.0
 
-replace github.com/Lomank123/go-integration-email/pkg/client => ./pkg/client
+replace github.com/go-web-services/go-integration-email/pkg/client => ./pkg/client
 
 require (
 	github.com/gin-gonic/gin v1.10.0
+	github.com/go-web-services/go-web-platform v0.0.0-20260501150237-122bf32135c9
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/swaggo/swag v1.16.4
 )
-
-require github.com/Lomank123/go-web-platform v0.0.0-20250822171926-a575b21f44d9
 
 require (
 	github.com/swaggo/files v1.0.1 // indirect
@@ -19,7 +18,6 @@ require (
 
 require (
 	github.com/KyleBanks/depth v1.2.1 // indirect
-	github.com/Lomank123/go-integration-email/pkg/client v0.0.0-00010101000000-000000000000
 	github.com/bytedance/sonic v1.12.8 // indirect
 	github.com/bytedance/sonic/loader v0.2.3 // indirect
 	github.com/cloudwego/base64x v0.1.5 // indirect
@@ -33,6 +31,7 @@ require (
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.25.0 // indirect
+	github.com/go-web-services/go-integration-email/pkg/client v0.0.0-00010101000000-000000000000
 	github.com/goccy/go-json v0.10.5 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
