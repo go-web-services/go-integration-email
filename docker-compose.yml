@@ -1,6 +1,7 @@
 services:
   go-integration-email:
     container_name: go-integration-email
+    restart: unless-stopped
     build:
       context: .
       dockerfile: debug/Dockerfile
