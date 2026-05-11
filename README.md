@@ -1,4 +1,6 @@
-# go-integration-email
+Visit main page: [https://github.com/go-web-services](https://github.com/go-web-services)
+
+# Go Web Services - go-integration-email
 
 `github.com/go-web-services/go-integration-email`
 
